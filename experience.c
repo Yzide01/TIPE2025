@@ -8,7 +8,7 @@
 
 //Retourne un jeu de données de taille db_size de vecteurs choisis uniformément dans [0;255]²
 database cree_jdd(int db_size){
-    database db = create_empty_database(db_size);
+    database db = cree_jdd_vide(db_size);
     for (int i = 0; i < db_size; i++){
         vector v = create_zero_vector(5);
         int experience = 1 + rand()%5;
