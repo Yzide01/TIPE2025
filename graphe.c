@@ -20,6 +20,7 @@ graphe g0 = {
   }
 };
 
+
 graphe g1 = {
   .nb_sommets = 6,
   .liste_adj = {
@@ -120,6 +121,8 @@ int depile(pile p) {
   return p->tab[p->sommet];
 }
 
+
+//Testé
 //Teste si v est successeur de u dans le graphe g
 bool est_successeur(graphe* g, int u, int v){
   int n = g->nb_sommets;
@@ -131,6 +134,8 @@ bool est_successeur(graphe* g, int u, int v){
   return false;
 }
 
+
+//Testé
 //Ajoute un arc de u à v dans g
 void ajoute_arc(graphe* g, int u, int v){ //bug ?
   int i = 0;
@@ -144,6 +149,8 @@ void ajoute_arc(graphe* g, int u, int v){ //bug ?
   g->liste_adj[u][i] = v;
 }
 
+
+//Testé
 //Supprime l'arc de u à v dans g complexité : O(m)
 void supprime_arc(graphe* g, int u, int v){
   assert(est_successeur(g,u,v));
@@ -161,6 +168,8 @@ void supprime_arc(graphe* g, int u, int v){
 
 }
 
+
+//Testé
 //Teste si le graphe g est acyclique en vérifiant qu'il y a un tri topologique
 bool est_acyclique(graphe* g){
     int n = g->nb_sommets;
@@ -210,6 +219,17 @@ bool est_acyclique(graphe* g){
 }
 
 
+//Affiche la liste d'adjacence du graphe g
+void affiche_graphe(graphe* g){
+  for (int i = 0; i < g->nb_sommets; i++){
+    for (int j = 0; j < g->nb_sommets; j++){
+      printf("%d ",g->liste_adj[i][j]);
+    }
+    printf("\n");
+  }
+}
+
+//Testé
 //copie le graphe g
 graphe* copie(graphe* g){
   int n=g->nb_sommets;
@@ -249,7 +269,7 @@ graphe* modifie(graphe* g, int u, int v){
   return g2;
 }
 
-
+//Testé
 //Hypothèse : il existe un arc de u à v dans g
 //Effet : renvoie une copie de g donc l'arc de u à v a été retournée
 graphe* retourne_arc(graphe* g, int u, int v){
@@ -281,10 +301,18 @@ void test_utilitaires (){
   free(g_test);
 }
 
+//Teste modifie
+void test_utilitaires2(){
+  graphe* g_test = modifie(&g0,1,4);
+  g_test = modifie(g_test,2,5);
+  g_test = modifie(g_test,0,3);
+  affiche_graphe(g_test);
+}
 
 int main(){
     test_est_acyclique();
-    test_utilitaires();
+    //test_utilitaires();
+    test_utilitaires2();
     printf("réussi\n");
     return 0;
 }
